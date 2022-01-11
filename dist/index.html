@@ -7,6 +7,20 @@
   <title>Document</title>
 <script defer src="index.bundle.js"></script></head>
 <body>
-  <h1>Hello webpack!</h1>
+  <main class="main">
+    <h1>Today's To Do</h1>
+    <div class="card">
+      <h4 class="card-item">Demo<i class="fas fa-sync-alt"></i></h4>
+      <form action="/test" class="card-item">
+        <input class="input-task" type="text" placeholder="Add to your list...">
+        <i class="fas fa-plus"></i>
+      </form>
+      <ul id="todo-list" class="card-ul">
+      </ul>
+      <div class="card-item btn-item">
+        <button class="btn" type="button">Clear all Completed</button>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
