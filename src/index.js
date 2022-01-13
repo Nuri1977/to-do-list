@@ -59,7 +59,10 @@ const renderList = () => {
     <li class="list-item"  >
       <input type="checkbox" name="vehicle1" value=${todos[i].completed}>
       <input id="${todos[i].index}" class="input-task1" type="text" readonly value="${todos[i].description}"/>
-      <button id="${todos[i].index}" class="btn-remove delete">
+      <button id="${todos[i].index}" class="btn-remove edit">
+        <i id="${todos[i].index}" class="fas fa-ellipsis-v edit"></i>
+      </button>
+      <button id="${todos[i].index}" class="btn-remove delete hidden">
         <i id="${todos[i].index}" class="fas fa-trash-alt delete"></i>
       </button>
     </li>
@@ -81,10 +84,73 @@ addBtn.addEventListener('click', () => {
 /*  EVENT LISTENERS remove */
 todoList.addEventListener('click', (event) => {
   const deleteId = (event.path[1].id);
-  const editElement = (event.path[2]);
-  if (editElement.classList.contains('delete')) {
+  const deleteElement = (event.path[2]);
+  if (deleteElement.classList.contains('delete')) {
     todos = todos.filter((element) => element.index !== +deleteId);
     localStorage.setItem('todosStore', JSON.stringify(todos));
     renderList();
+  }
+});
+
+todoList.addEventListener('click', (event) => {
+  const editId = (event.path);
+  const editBtn = (event.path[2]);
+  const listItem = (event.path[3]);
+  const deleteBtn = listItem.childNodes[7];
+  const inputField = listItem.childNodes[3];
+  if (editBtn.classList.contains('edit')) {
+    /*
+    console.log(editId);
+    console.log(event);
+    console.log(editBtn);
+    console.log(deleteBtn);
+    console.log(listItem);
+    console.log(inputField);
+    */
+    editBtn.classList.add('hidden');
+    deleteBtn.classList.remove('hidden');
+    inputField.readOnly = false;
+    inputField.classList.add('textedit');
+    inputField.focus();
+    inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+  }
+});
+
+todoList.addEventListener('keyup', (event) => {
+  const editId = event.target.id;
+  const inputItem = event.target;
+  for (let i = 0; i < todos.length; i += 1) {
+    if (todos[i].index === +editId) {
+      todos[i].description = inputItem.value.trim();
+    }
+  }
+  localStorage.setItem('todosStore', JSON.stringify(todos));
+  console.log(editId);
+  console.log(todos);
+});
+
+todoList.addEventListener('focusout', (event) => {
+  const inputField = event.target;
+  const listItem = inputField.parentElement;
+  const relTarget = event.relatedTarget;
+  let checkDelete = false;
+  if (relTarget.classList.contains('delete')) {
+    checkDelete = true;
+    return;
+  }
+
+  if (inputField.classList.contains('input-task1') && checkDelete === false) {
+    const editBtn = listItem.childNodes[5];
+    const deleteBtn = listItem.childNodes[7];
+    editBtn.classList.remove('hidden');
+    deleteBtn.classList.add('hidden');
+    inputField.classList.remove('textedit');
+    inputField.readOnly = true;
+    /*
+    console.log(inputField);
+    console.log(listItem);
+    console.log(editBtn);
+    console.log(deleteBtn);
+    */
   }
 });

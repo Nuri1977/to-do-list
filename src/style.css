@@ -105,6 +105,10 @@ h1 {
   color: #575454;
 }
 
+.textedit {
+  background:honeydew;
+}
+
 .hidden {
   display: none;
 }
