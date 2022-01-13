@@ -40,7 +40,6 @@
     "webpack-dev-server": "^4.7.2"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "@fortawesome/fontawesome-free": "^5.15.4"
+    "lodash": "^4.17.21"
   }
 }

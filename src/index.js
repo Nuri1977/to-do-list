@@ -1,8 +1,4 @@
 import './style.css';
-import '@fortawesome/fontawesome-free/js/fontawesome.js';
-import '@fortawesome/fontawesome-free/js/solid.js';
-import '@fortawesome/fontawesome-free/js/regular.js';
-import '@fortawesome/fontawesome-free/js/brands.js';
 import { addTodo, deleteTodo } from './crud.js';
 
 /* VARIABLES */
@@ -56,7 +52,7 @@ const renderList = () => {
   todoList.innerHTML = '';
   for (let i = 0; i < todos.length; i += 1) {
     const content = `
-    <li class="list-item"  >
+    <li class="list-item" id="${todos[i].index}" >
       <input type="checkbox" name="vehicle1" value=${todos[i].completed}>
       <input id="${todos[i].index}" class="input-task1" type="text" readonly value="${todos[i].description}"/>
       <button id="${todos[i].index}" class="btn-remove edit">
@@ -82,35 +78,34 @@ addBtn.addEventListener('click', () => {
 });
 
 /*  EVENT LISTENERS remove */
+
 todoList.addEventListener('click', (event) => {
-  const deleteId = (event.path[1].id);
-  const deleteElement = (event.path[2]);
+  const listItem = event.target;
+  const deleteElement = listItem.childNodes[7];
+  const deleteId = (event.target.id);
+  console.log(listItem);
+  console.log(deleteId);
+  console.log(deleteElement);
+  /*
   if (deleteElement.classList.contains('delete')) {
     todos = todos.filter((element) => element.index !== +deleteId);
     localStorage.setItem('todosStore', JSON.stringify(todos));
     renderList();
   }
+  */
 });
 
+/*  EVENT LISTENERS edit */
 todoList.addEventListener('click', (event) => {
-  const editId = (event.path);
-  const editBtn = (event.path[2]);
-  const listItem = (event.path[3]);
+  const inputField = event.target;
+  const listItem = (event.path[1]);
   const deleteBtn = listItem.childNodes[7];
-  const inputField = listItem.childNodes[3];
-  if (editBtn.classList.contains('edit')) {
-    /*
-    console.log(editId);
-    console.log(event);
-    console.log(editBtn);
-    console.log(deleteBtn);
-    console.log(listItem);
-    console.log(inputField);
-    */
+  const editBtn = listItem.childNodes[5];
+  if (inputField.classList.contains('input-task1')) {
     editBtn.classList.add('hidden');
     deleteBtn.classList.remove('hidden');
-    inputField.readOnly = false;
     inputField.classList.add('textedit');
+    inputField.readOnly = false;
     inputField.focus();
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
   }
@@ -125,21 +120,20 @@ todoList.addEventListener('keyup', (event) => {
     }
   }
   localStorage.setItem('todosStore', JSON.stringify(todos));
-  console.log(editId);
-  console.log(todos);
 });
 
 todoList.addEventListener('focusout', (event) => {
   const inputField = event.target;
   const listItem = inputField.parentElement;
   const relTarget = event.relatedTarget;
+  /*
   let checkDelete = false;
   if (relTarget.classList.contains('delete')) {
     checkDelete = true;
     return;
   }
-
-  if (inputField.classList.contains('input-task1') && checkDelete === false) {
+  */
+  if (inputField.classList.contains('input-task1')) {
     const editBtn = listItem.childNodes[5];
     const deleteBtn = listItem.childNodes[7];
     editBtn.classList.remove('hidden');
