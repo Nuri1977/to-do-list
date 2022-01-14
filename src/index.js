@@ -52,7 +52,7 @@ const renderList = () => {
   todoList.innerHTML = '';
   for (let i = 0; i < todos.length; i += 1) {
     const content = `
-    <li class="list-item" id="${todos[i].index}" >
+    <li class="list-item" id="list${todos[i].index}" >
       <input type="checkbox" name="vehicle1" value=${todos[i].completed}>
       <input id="${todos[i].index}" class="input-task1" type="text" readonly value="${todos[i].description}"/>
       <button id="${todos[i].index}" class="btn-remove edit">
@@ -81,21 +81,19 @@ addBtn.addEventListener('click', () => {
 
 todoList.addEventListener('click', (event) => {
   const listItem = event.target;
-  const deleteElement = listItem.childNodes[7];
-  const deleteId = (event.target.id);
-  console.log(listItem);
-  console.log(deleteId);
-  console.log(deleteElement);
-  /*
-  if (deleteElement.classList.contains('delete')) {
+  const listId = (listItem.id);
+  const deleteId = listId.substring(4);
+  const test = listId.startsWith('list');
+  if (test === true) {
+    listItem.remove();
     todos = todos.filter((element) => element.index !== +deleteId);
     localStorage.setItem('todosStore', JSON.stringify(todos));
     renderList();
   }
-  */
 });
 
 /*  EVENT LISTENERS edit */
+
 todoList.addEventListener('click', (event) => {
   const inputField = event.target;
   const listItem = (event.path[1]);
@@ -125,14 +123,6 @@ todoList.addEventListener('keyup', (event) => {
 todoList.addEventListener('focusout', (event) => {
   const inputField = event.target;
   const listItem = inputField.parentElement;
-  const relTarget = event.relatedTarget;
-  /*
-  let checkDelete = false;
-  if (relTarget.classList.contains('delete')) {
-    checkDelete = true;
-    return;
-  }
-  */
   if (inputField.classList.contains('input-task1')) {
     const editBtn = listItem.childNodes[5];
     const deleteBtn = listItem.childNodes[7];
@@ -140,11 +130,5 @@ todoList.addEventListener('focusout', (event) => {
     deleteBtn.classList.add('hidden');
     inputField.classList.remove('textedit');
     inputField.readOnly = true;
-    /*
-    console.log(inputField);
-    console.log(listItem);
-    console.log(editBtn);
-    console.log(deleteBtn);
-    */
   }
 });
