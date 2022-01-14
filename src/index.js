@@ -1,5 +1,5 @@
 import './style.css';
-import { addTodo, deleteTodo } from './crud.js';
+import { addTodo, deleteTodo, editTodo } from './crud.js';
 
 /* VARIABLES */
 const localTodos = localStorage.getItem('todosStore');
@@ -33,6 +33,7 @@ if (localTodos) {
 const todoList = document.getElementById('todo-list');
 const addBtn = document.getElementById('add-btn');
 const addInput = document.getElementById('todo-input');
+const removeCompleted = document.getElementById('remove-completed');
 
 /* CLASSES */
 class Todo {
@@ -53,7 +54,7 @@ const renderList = () => {
   for (let i = 0; i < todos.length; i += 1) {
     const content = `
     <li class="list-item" id="list${todos[i].index}" >
-      <input type="checkbox" name="vehicle1" value=${todos[i].completed}>
+      <input id="${todos[i].index}" class="checkbox" type="checkbox" name="vehicle1" ${todos[i].completed ? 'checked' : ''}>
       <input id="${todos[i].index}" class="input-task1" type="text" readonly value="${todos[i].description}"/>
       <button id="${todos[i].index}" class="btn-remove edit">
         <i id="${todos[i].index}" class="fas fa-ellipsis-v edit"></i>
@@ -112,11 +113,7 @@ todoList.addEventListener('click', (event) => {
 todoList.addEventListener('keyup', (event) => {
   const editId = event.target.id;
   const inputItem = event.target;
-  for (let i = 0; i < todos.length; i += 1) {
-    if (todos[i].index === +editId) {
-      todos[i].description = inputItem.value.trim();
-    }
-  }
+  editTodo(todos, editId, inputItem);
   localStorage.setItem('todosStore', JSON.stringify(todos));
 });
 
@@ -131,4 +128,36 @@ todoList.addEventListener('focusout', (event) => {
     inputField.classList.remove('textedit');
     inputField.readOnly = true;
   }
+});
+
+/*  EVENT LISTENERS checkbox */
+todoList.addEventListener('input', (event) => {
+  const checkBox = event.target;
+  const checkId = checkBox.id;
+  if (checkBox.classList.contains('checkbox')) {
+    if (checkBox.checked === true) {
+      for (let i = 0; i < todos.length; i += 1) {
+        if (todos[i].index === +checkId) {
+          todos[i].completed = true;
+          localStorage.setItem('todosStore', JSON.stringify(todos));
+        }
+      }
+    } else {
+      for (let i = 0; i < todos.length; i += 1) {
+        if (todos[i].index === +checkId) {
+          todos[i].completed = false;
+          localStorage.setItem('todosStore', JSON.stringify(todos));
+        }
+      }
+    }
+  }
+});
+
+/*  EVENT LISTENERS remove completed */
+
+removeCompleted.addEventListener('click', () => {
+  console.log('clicked');
+  todos = todos.filter((element) => element.completed !== true);
+  localStorage.setItem('todosStore', JSON.stringify(todos));
+  renderList();
 });

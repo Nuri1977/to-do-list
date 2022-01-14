@@ -109,6 +109,10 @@ h1 {
   background: honeydew;
 }
 
+.list-item input:checked + input {
+  text-decoration: line-through;
+}
+
 .hidden {
   display: none;
 }
