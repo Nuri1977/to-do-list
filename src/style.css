@@ -69,12 +69,25 @@ h1 {
   flex: 1;
 }
 
-.input-task:focus {
+.input-task1 {
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  flex: 1;
+}
+
+.input-task:focus,
+.input-task1:focus {
   outline: none;
 }
 
 .btn-item {
   padding: 0;
+}
+
+.btn-remove {
+  border: none;
+  cursor: pointer;
 }
 
 .btn {
@@ -88,8 +101,16 @@ h1 {
 .fa-sync-alt,
 .fa-plus {
   cursor: pointer;
-  font-size: 15px;
+  font-size: 24px;
   color: #575454;
+}
+
+.textedit {
+  background: honeydew;
+}
+
+.list-item input:checked + input {
+  text-decoration: line-through;
 }
 
 .hidden {

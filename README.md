@@ -4,15 +4,15 @@
 
 > Microverse project for practicing javascript coding skills..
 
-![screenshot](./app_screenshot.png)
+![screenshot](./src/images/todo.png)
 
 Additional description about the project and its features.
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- HTML
+- CSS
+- Javascript
 
 ## Live Demo
 
@@ -28,14 +28,6 @@ clone repo: `https://github.com/Nuri1977/to-do-list.git`
 
 ### Install
 run `npm install` to install dependencies
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
 
 ## Authors
 
