@@ -78,6 +78,13 @@ addBtn.addEventListener('click', () => {
   renderList();
 });
 
+addInput.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addBtn.click();
+  }
+});
+
 /*  EVENT LISTENERS remove */
 
 todoList.addEventListener('click', (event) => {

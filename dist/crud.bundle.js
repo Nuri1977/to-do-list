@@ -16,7 +16,7 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodo\": () => (/* binding */ addTodo),\n/* harmony export */   \"deleteTodo\": () => (/* binding */ deleteTodo)\n/* harmony export */ });\nfunction addTodo(addInput, todos, TodoClass) {\n  if (addInput.value !== '') {\n    const newTodo = new TodoClass(addInput.value, todos);\n    todos.push(newTodo);\n  } else {\n    alert('Canot add emty field');\n  }\n}\nfunction deleteTodo(todos, deleteId) {\n  todos = todos.filter(element => element.index !== +deleteId);\n}\n\n//# sourceURL=webpack://microverse-template/./src/crud.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodo\": () => (/* binding */ addTodo),\n/* harmony export */   \"deleteTodo\": () => (/* binding */ deleteTodo),\n/* harmony export */   \"editTodo\": () => (/* binding */ editTodo)\n/* harmony export */ });\nfunction addTodo(addInput, todos, TodoClass) {\n  if (addInput.value !== '') {\n    const newTodo = new TodoClass(addInput.value, todos);\n    todos.push(newTodo);\n  } else {\n    alert('Canot add emty field');\n  }\n}\nfunction deleteTodo(todos, deleteId) {\n  todos = todos.filter(element => element.index !== +deleteId);\n}\nfunction editTodo(todos, editId, inputItem) {\n  for (let i = 0; i < todos.length; i += 1) {\n    if (todos[i].index === +editId) {\n      todos[i].description = inputItem.value.trim();\n    }\n  }\n}\n\n//# sourceURL=webpack://microverse-template/./src/crud.js?");
 
 /***/ })
 
