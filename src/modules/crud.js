@@ -7,10 +7,6 @@ export function addTodo(addInput, todos, TodoClass) {
   }
 }
 
-export function deleteTodo(todos, deleteId) {
-  todos = todos.filter((element) => element.index !== +deleteId);
-}
-
 export function editTodo(todos, editId, inputItem) {
   for (let i = 0; i < todos.length; i += 1) {
     if (todos[i].index === +editId) {

@@ -1,30 +1,10 @@
 import './style.css';
-import { addTodo, deleteTodo, editTodo } from './crud.js';
+import { addTodo, editTodo } from './modules/crud.js';
+import updateTodo from './modules/update.js';
 
 /* VARIABLES */
 const localTodos = localStorage.getItem('todosStore');
-let todos = [
-  {
-    description: 'Task number one',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Task number three',
-    completed: true,
-    index: 3,
-  },
-  {
-    description: 'Task number four',
-    completed: true,
-    index: 4,
-  },
-  {
-    description: 'Task number two',
-    completed: false,
-    index: 2,
-  },
-];
+let todos = [];
 
 if (localTodos) {
   todos = JSON.parse(localTodos);
@@ -141,29 +121,12 @@ todoList.addEventListener('focusout', (event) => {
 todoList.addEventListener('input', (event) => {
   const checkBox = event.target;
   const checkId = checkBox.id;
-  if (checkBox.classList.contains('checkbox')) {
-    if (checkBox.checked === true) {
-      for (let i = 0; i < todos.length; i += 1) {
-        if (todos[i].index === +checkId) {
-          todos[i].completed = true;
-          localStorage.setItem('todosStore', JSON.stringify(todos));
-        }
-      }
-    } else {
-      for (let i = 0; i < todos.length; i += 1) {
-        if (todos[i].index === +checkId) {
-          todos[i].completed = false;
-          localStorage.setItem('todosStore', JSON.stringify(todos));
-        }
-      }
-    }
-  }
+  updateTodo(checkBox, todos, checkId);
 });
 
 /*  EVENT LISTENERS remove completed */
 
 removeCompleted.addEventListener('click', () => {
-  console.log('clicked');
   todos = todos.filter((element) => element.completed !== true);
   localStorage.setItem('todosStore', JSON.stringify(todos));
   renderList();
