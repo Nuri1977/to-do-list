@@ -1,22 +1,11 @@
 import Store from './store.js';
 
-export function updateTodo(checkBox, checkId) {
+export function updateTodo(checkId, isCompleted) {
   const todos = Store.getTodos();
-  if (checkBox.classList.contains('checkbox')) {
-    if (checkBox.checked === true) {
-      for (let i = 0; i < todos.length; i += 1) {
-        if (todos[i].index === +checkId) {
-          todos[i].completed = true;
-          Store.setTodos(todos);
-        }
-      }
-    } else {
-      for (let i = 0; i < todos.length; i += 1) {
-        if (todos[i].index === +checkId) {
-          todos[i].completed = false;
-          Store.setTodos(todos);
-        }
-      }
+  for (let i = 0; i < todos.length; i += 1) {
+    if (todos[i].index === +checkId) {
+      todos[i].completed = isCompleted;
+      Store.setTodos(todos);
     }
   }
 }

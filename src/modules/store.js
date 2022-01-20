@@ -14,5 +14,6 @@ export default class Store {
     todos.forEach((element, index) => {
       element.index = index + 1;
     });
+    localStorage.setItem('todosStore', JSON.stringify(todos));
   }
 }

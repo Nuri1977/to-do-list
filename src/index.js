@@ -6,7 +6,7 @@ import Store from './modules/store.js';
 const renderList = () => {
   const todoList = document.getElementById('todo-list');
   const todos = Store.getTodos();
-  todos.forEach((element, index) => { element.index = index + 1; });
+  Store.updateIndex(todos);
   todoList.innerHTML = '';
   for (let i = 0; i < todos.length; i += 1) {
     const content = `
@@ -88,7 +88,13 @@ const crudTodos = () => {
   todoList.addEventListener('input', (event) => {
     const checkBox = event.target;
     const checkId = checkBox.id;
-    updateTodo(checkBox, checkId);
+    if (checkBox.classList.contains('checkbox')) {
+      if (checkBox.checked === true) {
+        updateTodo(checkId, true);
+      } else {
+        updateTodo(checkId, false);
+      }
+    }
   });
 
   /*  EVENT LISTENERS delete completed todos */

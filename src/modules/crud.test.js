@@ -1,5 +1,4 @@
-import Todo from './class-todo.js';
-import { addTodo, deleteTodo, editTodo} from './crud.js';
+import { addTodo, deleteTodo, editTodo } from './crud.js';
 import Store from '../../__mocks__/store.js';
 
 describe('testind add functionality', () => {
