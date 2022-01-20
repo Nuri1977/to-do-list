@@ -31,7 +31,8 @@ const crudTodos = () => {
   const addInput = document.getElementById('todo-input');
   addBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    addTodo(addInput);
+    addTodo(addInput.value);
+    addInput.value = '';
     renderList();
   });
 
@@ -64,7 +65,7 @@ const crudTodos = () => {
     todoList.addEventListener('keyup', (event) => {
       const editId = event.target.id;
       const inputItem = event.target;
-      editTodo(editId, inputItem);
+      editTodo(editId, inputItem.value.trim());
     });
   });
 
