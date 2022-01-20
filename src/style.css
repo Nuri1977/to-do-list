@@ -85,6 +85,12 @@ h1 {
   padding: 0;
 }
 
+#add-btn {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
 .btn-remove {
   border: none;
   cursor: pointer;
