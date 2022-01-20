@@ -6,7 +6,7 @@ import Store from './modules/store.js';
 const renderList = () => {
   const todoList = document.getElementById('todo-list');
   const todos = Store.getTodos();
-
+  todos.forEach((element, index) => { element.index = index + 1; });
   todoList.innerHTML = '';
   for (let i = 0; i < todos.length; i += 1) {
     const content = `
@@ -46,7 +46,7 @@ const crudTodos = () => {
     }
   });
 
-  /*  EVENT LISTENERS edit */
+  /*  EVENT LISTENERS edit input field */
   todoList.addEventListener('click', (event) => {
     const inputField = event.target;
     const listItem = (event.path[1]);
@@ -83,12 +83,14 @@ const crudTodos = () => {
     }
   });
 
+  /*  EVENT LISTENERS edit check box */
   todoList.addEventListener('input', (event) => {
     const checkBox = event.target;
     const checkId = checkBox.id;
     updateTodo(checkBox, checkId);
   });
 
+  /*  EVENT LISTENERS delete completed todos */
   const removeCompleted = document.getElementById('remove-completed');
   removeCompleted.addEventListener('click', () => {
     removeComleted();
@@ -96,9 +98,5 @@ const crudTodos = () => {
   });
 };
 
-const initApp = () => {
-  renderList();
-  crudTodos();
-};
-
-initApp();
+crudTodos();
+renderList();
