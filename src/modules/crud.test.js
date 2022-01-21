@@ -1,5 +1,5 @@
 import { addTodo, deleteTodo, editTodo } from './crud.js';
-import Store from '../../__mocks__/store.js';
+import Store from './store.js';
 
 describe('testind add functionality', () => {
   it('test adding new todo', () => {
