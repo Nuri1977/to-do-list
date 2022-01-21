@@ -22,7 +22,7 @@ document.body.innerHTML = `
 `;
 
 describe('testind Dom functionality', () => {
-  it('Testing if two list items are added to dom', () => {
+  it('Testing if one list items are added to dom', () => {
     addTodo('task number 1');
     renderList();
     expect(document.querySelectorAll('li').length).toBe(1);
@@ -32,6 +32,11 @@ describe('testind Dom functionality', () => {
     addTodo('task number 2');
     renderList();
     expect(document.querySelectorAll('li').length).toBe(2);
+  });
+  it('Testing if one item is removed from the DOM', () => {
+    deleteTodo(2);
+    renderList();
+    expect(document.querySelectorAll('li').length).toBe(1);
   });
   it('Testing if one item is removed from the DOM', () => {
     deleteTodo(2);

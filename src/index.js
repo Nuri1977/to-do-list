@@ -2,7 +2,6 @@ import './style.css';
 import { addTodo, editTodo, deleteTodo } from './modules/crud.js';
 import { updateTodo, removeComleted } from './modules/update.js';
 import renderList from './modules/render-list.js';
-import Store from './modules/store.js';
 
 const crudTodos = () => {
   /*  EVENT LISTENERS add */
